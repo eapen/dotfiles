@@ -1,0 +1,4 @@
+export SSH_CLIENT="10.245.38.217 50643 22"
+export SSH_TTY="/dev/pts/5"
+export SSH_AUTH_SOCK="/tmp/ssh-IIQttr2676/agent.2676"
+export SSH_CONNECTION="10.245.38.217 50643 10.254.233.34 22"

@@ -1,0 +1,4 @@
+\timing
+\x
+\set HISTSIZE 9999
+\set HISTCONTROL ignoreboth

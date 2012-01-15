@@ -1,0 +1,51 @@
+[user]
+	name = NAME
+	email = EMAIL
+[core]
+	#autocrlf = input
+	excludesfile = /home/eapen/.gitignore
+	#safecrlf = true
+[alias]
+	ci = commit -a -m
+	llog = log --pretty=oneline --abbrev-commit
+	changes = diff --name-status -r
+	diffstat = diff --stat -r
+	diffall = diff HEAD
+	type = cat-file -t
+	dump = cat-file -p
+	graph = log --date=\"short\" --format=\"%C(yellow)%h%Creset [%cN] %C(white)%ad%Creset %s\" --graph
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	ls = ls-files
+	#show files ignore by git
+	ign = ls-files -o -i --exclude-standard
+	who = log -s --
+	both = diff HEAD
+	stl = stash list --date=local
+	stlr = stash list --relative-date
+[color]
+	ui = true
+	branch = auto
+	status = auto
+	diff = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[gui]
+	fontui = -family clean -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family clean -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+[format]
+	numbered = auto
+[core]
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+

@@ -1,0 +1,19 @@
+export DEBEMAIL=''
+export DEBFULLNAME=''
+
+export PGPASSWORD=''
+
+export PYTHONPATH=/codebase
+
+function pssh {
+    machines=`findpool -s $1`
+    RETVAL=$?
+    if [ $RETVAL -eq 0 ]; then
+        cssh -lUSERNAME $machines
+    fi
+}
+
+function workmode {
+    export PYTHONPATH=/codebase
+    export MAGICENV=development
+}

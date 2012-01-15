@@ -1,0 +1,59 @@
+# C-a :source .screenrc
+term screen-256color
+termcapinfo xterm* ti@:te@
+startup_message off
+#vbell on
+#vbell_msg "    Woof Woof...    "
+autodetach on # autodetach session instead of terminating screen completely
+altscreen on # prevent text from staying on screen
+shelltitle "$ |bash"
+defscrollback 30000
+defutf8 on
+nonblock on
+nethack off
+deflogin on
+monitor on
+
+#escape ``
+#escape `e
+
+# BIND ESCAPE TO F11!
+# bindkey -k F1 command
+
+# if term screen-256color doesnt do the trick, uncomment the following three lines
+attrcolor b ".I"    # allow bold colors - necessary for some reason
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
+defbce on    # use current bg color for erased chars
+
+escape ^Zz # replace Ctrl-A with this
+bind b eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"
+
+caption string "%?%F%{= Bk}%? %C%A %D %d-%m-%Y %{= kB} %t%= %?%F%{= Bk}%:%{= wk}%? %n "
+
+hardstatus off
+hardstatus alwayslastline
+#hardstatus alwaysfirstline
+#hardstatus string '%{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK}%+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
+#hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+#hardstatus string '%{= kw}[ %{= kb}%H%{= kw} ][ %= %{= kw}%?%-Lw%?%{= kr}(%{= kW}%n*%f %t%?(%u)%?%{= kr})%{= kw}%?%+Lw%?%?%= %{w} ][ %{r}%l%{w} ]%{w}[%{r} %d/%m/%y %C %A %{w}]%{w}'
+#hardstatus string '%{= kw}[ %{= kb}%H%{= kw} ][%= %{= kw}%?%-Lw%?%{= kW}%n*%f %t%?%?%{= kw}%?%+Lw%?%?%= ][ %{r}%l%{w} ]%{w}[%{r} %d/%m/%y %C %A %{w}]%{w}'
+#hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< "
+hardstatus string "%{.bW}%-w%{.rW}%f%n %t%{-}%+w %=%{..G}[%H %l] %{..Y} %m/%d %c "
+
+
+#bind 'R' screen ssh s1554463@sunfire16
+#bind 'R' screen -t sunfire16 ssh s1554463@sunfire16
+bind ^k
+bind ^\
+bind \\ quit
+
+
+chdir /pluto/pycloud
+screen -t DEVELOP 0
+screen -t TEST 1
+chdir
+screen -t BASH 2
+focus
+select 0
+
+#screen -t sunfire 3 ssh s1554463@132.234.222.1 -t 'screen -d -RR spl'
