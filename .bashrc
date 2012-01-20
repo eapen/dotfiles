@@ -26,7 +26,7 @@ shopt -s histappend
 shopt -s cmdhist
 
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-typeset -r PROMPT_COMMAND
+#typeset -r PROMPT_COMMAND
 
 export PYTHONSTARTUP=~/.pythonrc
 export WORKON_HOME="$HOME/.virtualenvs"
@@ -73,12 +73,12 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-#if [ "$color_prompt" = yes ]; then
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\w$(bash_git_branch)\$ '
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\w\[\033[01;34m\]$(bash_git_branch)\[\033[00m\]\$ '
-#else
-#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-#fi
+##if [ "$color_prompt" = yes ]; then
+##PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\w$(bash_git_branch)\$ '
+#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\w\[\033[01;34m\]$(bash_git_branch)\[\033[00m\]\$ '
+##else
+##    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+##fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -107,6 +107,8 @@ fi
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 # some more ls aliases
+alias ack='ack-grep --type=python'
+alias grep='grep --color -n'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -139,6 +141,9 @@ fi
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
+
+# autocomplete ssh from bash_history
+complete -W "$(echo $(grep '^ssh ' .bash_history | sort -u | sed 's/^ssh //'))" ssh
 
 source $HOME/.bashrc_private
 source $HOME/.git_completion

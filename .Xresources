@@ -1,8 +1,14 @@
 URxvt*scrollBar: false
 !URxvt*font:  xft:Inconsolata:size=9
 !URxvt*font:  xft:Inconsolata\ for\ Powerline:size=9
-URxvt.font:  xft:Inconsolata for Powerline:size=9
 !URxvt*font:  xft:Menlo-Powerline:size=9
+
+URxvt*font:                 xft:Monaco for Powerline:regular:size=8
+URxvt*imFont:               xft:Monaco for Powerline:regular:size=8
+URxvt*boldFont:             xft:Monaco for Powerline:bold:size=8
+URxvt*italicFont:           xft:Monaco for Powerline:italic:size=8
+URxvt*boldItalicFont:       xft:Monaco for Powerline:bold:italic:size=8
+
 URxvt*iconFile: /usr/share/icons/Humanity/apps/16/utilities-terminal.svg
 URxvt.perl-ext-common:  default,matcher,tabbed
 URxvt.urlLauncher:      /usr/bin/google-chrome
@@ -38,9 +44,8 @@ URxvt.tabbed.tab-bg:    0
 *color14: #4eb4fa
 *color15: #d0d0d0
 
-
-Xterm*background: Black
-Xterm*foreground: Wheat
+!Xterm*background: Black
+!Xterm*foreground: Wheat
 Rxvt*background: Black
 Rxvt*foreground: Wheat
 emacs*Background: DarkSlateGray
@@ -50,7 +55,6 @@ emacs*cursorColor: Orchid
 emacs*bitmapIcon: on
 emacs*font: fixed
 emacs.geometry:80x25
-
 
 !! Colour scheme
 !*background:#1a1a1a
