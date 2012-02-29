@@ -3,7 +3,7 @@ servers = (
   { address = "eu.irc6.net"; chatnet = "IRCnet"; port = "6667"; },
   {
     address = "irc.freenode.net";
-    chatnet = "Freenode";
+    chatnet = "freenode";
     port = "6667";
     autoconnect = "yes";
   },
@@ -38,6 +38,14 @@ servers = (
     address = "irc.ebay.com";
     chatnet = "ebay";
     port = "6667";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.freenode.com";
+    chatnet = "IRCnet";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
     autoconnect = "yes";
   }
 );
@@ -112,7 +120,8 @@ chatnets = {
 
 channels = (
   { name = "#milo"; chatnet = "ebay"; autojoin = "yes"; },
-  { name = "#milo-data"; chatnet = "ebay"; autojoin = "yes"; }
+  { name = "#milo-data"; chatnet = "ebay"; autojoin = "yes"; },
+  { name = "#python"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -226,7 +235,7 @@ statusbar = {
         lag = { priority = "-1"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
-        usercount = { };
+        # usercount = { };
       };
     };
 
@@ -299,14 +308,17 @@ settings = {
     autolog = "yes";
     autolog_level = "all -crap -clientcrap -ctcps";
     bell_beeps = "yes";
-    beep_msg_level = "MSGS NOTICES DCC DCCMSGS HIGHLIGHT";
+    beep_msg_level = "MSGS DCC DCCMSGS HIGHLIGHT";
   };
   "perl/core/scripts" = {
     awl_display_key = "$Q%K|%n$H$C$S";
     awl_block = "-15";
   };
 };
-hilights = ( { text = "eapen"; nick = "yes"; word = "yes"; } );
+hilights = (
+  { text = "eapen"; nick = "yes"; word = "yes"; },
+  { text = "george"; nick = "yes"; word = "yes"; }
+);
 windows = {
   1 = {
     items = (
@@ -331,7 +343,12 @@ windows = {
   3 = { name = "hilight"; sticky = "yes"; };
 };
 mainwindows = {
-  1 = { first_line = "5"; lines = "55"; };
-  3 = { first_line = "1"; lines = "4"; };
+  1 = { first_line = "8"; lines = "55"; };
+  3 = { first_line = "1"; lines = "7"; };
 };
 logs = { };
+ignores = (
+  { mask = "milo-robot"; level = "ALL"; },
+  { level = "PARTS NICKS"; channels = ( "#milo-data" ); },
+  { level = "PARTS NICKS"; channels = ( "#milo" ); }
+);

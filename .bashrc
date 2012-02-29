@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 . $HOME/.ssh/ssh-login
 
+export TERM=xterm-256color
+
 export EDITOR='vim'
 export PAGER=less
 export LESS='-S -R'
@@ -28,6 +30,7 @@ shopt -s cmdhist
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 #typeset -r PROMPT_COMMAND
 
+export PYTHONPATH=$PYTHONPATH:~/dev/feeder
 export PYTHONSTARTUP=~/.pythonrc
 export WORKON_HOME="$HOME/.virtualenvs"
 source /usr/local/bin/virtualenvwrapper.sh
@@ -35,6 +38,8 @@ source /usr/local/bin/virtualenvwrapper.sh
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 eval "`dircolors -b`"
+
+#export PS1='\[\033[0;35m\]\h\[\033[0;33m\] \w\[\033[00m\]'`hostname`:`ifconfig|grep Bcast|awk ' { print $2 }'|awk -F":" ' { print $2 }'`'$ '
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -54,7 +59,7 @@ function bash_git_branch {
 }
 
 function act {
-    source $HOME/virt/$1/bin/activate
+    source $HOME/virt/$1bin/activate
 }
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -108,16 +113,12 @@ fi
 
 # some more ls aliases
 alias ack='ack-grep --type=python'
-alias grep='grep --color -n'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias ls="ls $LS_OPTIONS"
 alias gf='find | grep -v \.pyc$ | grep'
-alias fa='find | ack-grep'
 alias ggf='git ls-files | grep'
-alias gg='git grep'
-alias ack='ack-grep --type=python'
 alias p88='git diff --name-only HEAD^ | grep .py | xargs pep8'
 alias p8='git diff --name-only HEAD | grep .py | xargs pep8'
 alias pgfouine='~/pgfouine-1.2/pgfouine.php -file /var/log/pgsql > ~/pgfouine-1.2/index.html;google-chrome ~/pgfouine-1.2/index.html'
@@ -128,7 +129,8 @@ alias nx='sudo /usr/NX/bin/nxserver --status'
 
 alias fixssh='source ~/bin/fixssh'
 
-alias xrd='xrdb /home/eapen/.Xresources && xrdb -merge /home/eapen/.Xresources'
+alias xrd='xrdb -merge /home/eapen/.Xresources'
+alias tmux='tmux -2'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -143,7 +145,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # autocomplete ssh from bash_history
-complete -W "$(echo $(grep '^ssh ' .bash_history | sort -u | sed 's/^ssh //'))" ssh
+complete -W "$(echo $(grep '^ssh ' ~/.bash_history | sort -u | sed 's/^ssh //'))" ssh
 
 source $HOME/.bashrc_private
 source $HOME/.git_completion

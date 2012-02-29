@@ -25,7 +25,7 @@ attrcolor b ".I"    # allow bold colors - necessary for some reason
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
 defbce on    # use current bg color for erased chars
 
-escape ^Zz # replace Ctrl-A with this
+escape ^Zb # replace Ctrl-A with this
 bind b eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"
 
 caption string "%?%F%{= Bk}%? %C%A %D %d-%m-%Y %{= kB} %t%= %?%F%{= Bk}%:%{= wk}%? %n "
