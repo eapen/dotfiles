@@ -295,8 +295,8 @@ statusbar = {
 settings = {
   core = {
     real_name = "Eapen";
-    user_name = "eapen";
-    nick = "eapen";
+    user_name = "eapen_";
+    nick = "eapen_";
     timestamp_format = "%H:%M:%S";
   };
   "fe-text" = { actlist_sort = "refnum"; };
@@ -317,6 +317,7 @@ settings = {
 };
 hilights = (
   { text = "eapen"; nick = "yes"; word = "yes"; },
+  { text = "eapen_"; nick = "yes"; word = "yes"; },
   { text = "george"; nick = "yes"; word = "yes"; }
 );
 windows = {
