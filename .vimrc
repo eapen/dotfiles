@@ -97,7 +97,7 @@ set whichwrap=b,s,h,l,<,>,[,]                           " Move freely between fi
 syntax on                                               " Syntax highlighting on
 set t_Co=256
 set background=dark                                     " Changes highlighting to look better on dark bg
-colorscheme lettuce
+colorscheme solarized
 
 " }}}
 " Search and Movement --------------------------------- {{{

@@ -12,9 +12,9 @@ export LS_OPTIONS='-b --color=auto'
 
 export HISTCONTROL=erasedups
 export HISTFILE=$HOME/.bash_history
-export HISTFILESIZE=2000
+export HISTFILESIZE=50000
 export HISTIGNORE=
-export HISTSIZE=1000
+export HISTSIZE=50000
 export HISTTIMEFORMAT="%a %b %Y %T %z "
 
 typeset -r HISTCONTROL
@@ -28,9 +28,9 @@ shopt -s histappend
 shopt -s cmdhist
 
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-#typeset -r PROMPT_COMMAND
+typeset -r PROMPT_COMMAND
 
-export PYTHONPATH=$PYTHONPATH:~/dev/feeder
+export PYTHONPATH=$PYTHONPATH
 export PYTHONSTARTUP=~/.pythonrc
 export WORKON_HOME="$HOME/.virtualenvs"
 source /usr/local/bin/virtualenvwrapper.sh
@@ -58,10 +58,6 @@ function bash_git_branch {
     git branch 2> /dev/null | grep \* | python -c "print '['+raw_input()[2:]+']'" 2> /dev/null
 }
 
-function act {
-    source $HOME/virt/$1bin/activate
-}
-
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
@@ -78,27 +74,26 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-##if [ "$color_prompt" = yes ]; then
-##PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\w$(bash_git_branch)\$ '
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\w\[\033[01;34m\]$(bash_git_branch)\[\033[00m\]\$ '
-##else
-##    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-##fi
+#if [ "$color_prompt" = yes ]; then
+#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\w$(bash_git_branch)\$ '
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\w\[\033[01;34m\]$(bash_git_branch)\[\033[00m\]\$ '
+#else
+#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+#fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+## If this is an xterm set the title to user@host:dir
+#case "$TERM" in
+#xterm*|rxvt*)
+#    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+#    ;;
+#*)
+#    ;;
+#esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
@@ -123,8 +118,6 @@ alias p88='git diff --name-only HEAD^ | grep .py | xargs pep8'
 alias p8='git diff --name-only HEAD | grep .py | xargs pep8'
 alias pgfouine='~/pgfouine-1.2/pgfouine.php -file /var/log/pgsql > ~/pgfouine-1.2/index.html;google-chrome ~/pgfouine-1.2/index.html'
 
-alias _pgmemfix='sudo echo 4401332224 > /proc/sys/kernel/shmmax'
-
 alias nx='sudo /usr/NX/bin/nxserver --status'
 
 alias fixssh='source ~/bin/fixssh'
@@ -147,6 +140,7 @@ fi
 # autocomplete ssh from bash_history
 complete -W "$(echo $(grep '^ssh ' ~/.bash_history | sort -u | sed 's/^ssh //'))" ssh
 
+#export PS1='\[\033[0;33m\]'`ifconfig|grep Bcast|awk ' { print $2 }'|awk -F":" ' { print $2 }'`'$ '
 source $HOME/.bashrc_private
 source $HOME/.git_completion
 source $HOME/.bash_gitprompt
