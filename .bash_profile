@@ -115,7 +115,12 @@ function parse_git_branch {
   fi
   if [[ ${git_status} =~ ${branch_pattern} ]]; then
     branch=${BASH_REMATCH[1]}
-    echo "${branch}${remote}${state}"
+    prompt="${branch}${remote}${state}"
+  fi
+  if [[ ${#prompt} = 0 ]]; then
+      echo ""
+  else
+      echo " ${GREEN}[${prompt}${GREEN}]"
   fi
 }
 
@@ -131,7 +136,7 @@ function git_dirty_flag {
 #fi
 bash_prompt() {
   set_virtualenv
-  PS1="${debian_chroot:+($debian_chroot)}${PYTHON_VIRTUALENV}${LIGHT_GREEN}\u@\h${COLOR_NONE}:\w${BLUE} ${GREEN}[$(parse_git_branch)${GREEN}]${COLOR_NONE} \$ "
+  PS1="${debian_chroot:+($debian_chroot)}${PYTHON_VIRTUALENV}${LIGHT_GREEN}\u@\h${COLOR_NONE}:\w${BLUE}${COLOR_NONE}\$$(parse_git_branch)${GREEN}${COLOR_NONE} "
 }
 PROMPT_COMMAND=bash_prompt
 unset color_prompt force_color_prompt
