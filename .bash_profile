@@ -177,7 +177,7 @@ alias nx='sudo /usr/NX/bin/nxserver --status'
 alias fixssh='source ~/bin/fixssh'
 
 alias xrd='xrdb -merge /home/eapen/.Xresources'
-alias tmux='tmux -2'
+#alias tmux='tmux -2'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
