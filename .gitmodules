@@ -3,7 +3,7 @@
     url = https://github.com/mileszs/ack.vim.git
 
 [submodule "ctrlp"]
-    path = vim/bundle/ctrpl.vim
+    path = vim/bundle/ctrlp.vim
     url = https://github.com/kien/ctrlp.vim.git
 
 [submodule "fugitive"]
