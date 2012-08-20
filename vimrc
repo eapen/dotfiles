@@ -36,7 +36,7 @@ set backspace=indent,eol,start                          " Nothing can stop the b
 set number                                              " Turn on line numbers
 " set relativenumber
 set laststatus=2                                        " Always show status bar (w/ filename)
-set history=5500                                        " Remember 1000 lines of command
+set history=99999                                        " Remember 1000 lines of command
 set undoreload=10000                                    " Save whole buffer for undo when reloading it
 set undofile                                            " Specify new locate for vim7.3 persistent undo file
 set undodir=~/.vim/undo                                " Put undo history into ~/.vim/.undo
@@ -142,14 +142,6 @@ map <leader>r :RopeRename<CR>
 
 nmap <leader>a <Esc>:Ack!
 
-" 'jj' exits insert mode
-"inoremap jj <ESC>
-"cnoremap jj <ESC>
-
-" H jumps t first non whitespace char on line, L to last
-" noremap H ^
-" noremap L g_
-
 " <leader><space> clears all highlighting
 nnoremap <leader><space> :nohlsearch<cr>
 
@@ -220,15 +212,6 @@ map <C-kPlus> <C-w>+
 map <C-kMinus> <C-w>-
 map <C-S-kPlus> <C-w>_
 map <C-S-kMinus> <C-w>_
-
-" map <up> <nop>
-" map <down> <nop>
-" map <left> <nop>
-" map <right> <nop>
-" inoremap <up> <nop>
-" inoremap <down> <nop>
-" inoremap <left> <nop>
-" inoremap <right> <nop>
 
 cmap w!! w !sudo tee % >/dev/null
 

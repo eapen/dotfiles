@@ -1,7 +1,7 @@
 DOTFILES=~/dotfiles
 echo "Linking to" $DOTFILES
 
-ln -s $DOTFILES/bash_aliases .bash_aliases
+#ln -s $DOTFILES/bash_aliases .bash_aliases
 ln -s $DOTFILES/bash_gitprompt .bash_gitprompt
 ln -s $DOTFILES/bash_logout .bash_logout
 ln -s $DOTFILES/bash_profile .bash_profile
