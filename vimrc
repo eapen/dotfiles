@@ -39,7 +39,7 @@ set laststatus=2                                        " Always show status bar
 set history=5500                                        " Remember 1000 lines of command
 set undoreload=10000                                    " Save whole buffer for undo when reloading it
 set undofile                                            " Specify new locate for vim7.3 persistent undo file
-set undodir=~/.vim/.undo                                " Put undo history into ~/.vim/.undo
+set undodir=~/.vim/undo                                " Put undo history into ~/.vim/.undo
 set cpoptions+=J
 set backup                                              " Turn backups on
 set backupdir=~/.vim/backup                             " Where to keep backup files
