@@ -20,7 +20,7 @@
 
 [submodule "minibufexpl"]
     path = vim/bundle/minibufexpl
-    url = https://github.com/sontek/minibufexpl.vim.git
+    url = https://github.com/fholgado/minibufexpl.vim.git
 
 [submodule "pep8"]
     path = vim/bundle/pep8

@@ -36,10 +36,11 @@ set backspace=indent,eol,start                          " Nothing can stop the b
 set number                                              " Turn on line numbers
 " set relativenumber
 set laststatus=2                                        " Always show status bar (w/ filename)
-set history=99999                                        " Remember 1000 lines of command
+set notimeout ttimeout ttimeoutlen=200                  " quickly time out on keycodes, but never on mappings
+set history=99999                                       " Remember 1000 lines of command
 set undoreload=10000                                    " Save whole buffer for undo when reloading it
 set undofile                                            " Specify new locate for vim7.3 persistent undo file
-set undodir=~/.vim/undo                                " Put undo history into ~/.vim/.undo
+set undodir=~/.vim/undo                                 " Put undo history into ~/.vim/.undo
 set cpoptions+=J
 set backup                                              " Turn backups on
 set backupdir=~/.vim/backup                             " Where to keep backup files
@@ -67,8 +68,8 @@ set nostartofline                                       " leave my cursor where 
 set confirm                                             " dialog to save files
 " set visualbell
 "set t_vb=
-set cmdheight=3
-set guifont=Inconsolata\ for\ Powerline\ 10                             " Font
+set cmdheight=2
+set guifont=In2onsolata\ for\ Powerline\ 10                             " Font
 set fileformats=unix,dos,mac                            " Support all three, in that order
 " set iskeyword+=_,$,@,%,#                              " none of these are word dividers
 
@@ -98,7 +99,7 @@ set report=0                " : commands always print changed line count.
 " Colorscheme ---------------------------------------- {{{
 syntax on                                               " Syntax highlighting on
 set t_Co=256
-set background=light                                     " Changes highlighting to look better on dark bg
+set background=dark                                     " Changes highlighting to look better on dark bg
 colorscheme solarized
 
 " }}}
@@ -247,10 +248,19 @@ nnoremap <silent> <leader>? :execute "Ack! '" . substitute(substitute(substitute
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
 " MiniBuf
+let g:miniBufExplSplitBelow=0
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
+
+" MiniBufExpl Colors
+hi MBEVisibleActive guifg=#A6DB29 guibg=fg
+hi MBEVisibleChangedActive guifg=#F1266F guibg=fg
+hi MBEVisibleChanged guifg=#F1266F guibg=fg
+hi MBEVisibleNormal guifg=#5DC2D6 guibg=fg
+hi MBEChanged guifg=#CD5907 guibg=fg
+hi MBENormal guifg=#808080 guibg=fg
 
 let g:pyflakes_use_quickfix = 1
 let g:pep8_map='<leader>8'
