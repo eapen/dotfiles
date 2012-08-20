@@ -13,7 +13,7 @@ ln -s $DOTFILES/dircolors .dircolors
 ln -s $DOTFILES/emacs.d .emacs.d
 ln -s $DOTFILES/.fonts .fonts
 ln -s $DOTFILES/git_completion .git_completion
-ln -s $DOTFILES/gitconfig .gitconfig
+cp $DOTFILES/gitconfig .gitconfig
 ln -s $DOTFILES/gitignore .gitignore
 ln -s $DOTFILES/gitk .gitk
 ln -s $DOTFILES/irssi .irssi
