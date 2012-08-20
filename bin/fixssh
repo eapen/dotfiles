@@ -1,0 +1,4 @@
+export SSH_CLIENT="::1 33003 22"
+export SSH_TTY="/dev/pts/3"
+export SSH_AUTH_SOCK="/tmp/ssh-pmzCnV2029/agent.2029"
+export SSH_CONNECTION="::1 33003 ::1 22"
