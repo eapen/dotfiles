@@ -2,8 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 . $HOME/.ssh/ssh-login
 
-export CDPATH='.:~/dev/'
-
 export TERM=screen-256color
 
 export EDITOR='vim'
