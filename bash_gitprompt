@@ -69,5 +69,7 @@ function git_dirty_flag {
 bash_prompt() {
   set_virtualenv
   PS1="${debian_chroot:+($debian_chroot)}${PYTHON_VIRTUALENV}${LIGHT_GREEN}\u@\h${COLOR_NONE}:\w${BLUE}${COLOR_NONE}\$$(parse_git_branch)${GREEN}${COLOR_NONE} "
+  PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$PWD")'
 }
+
 PROMPT_COMMAND=bash_prompt;$PROMPT_COMMAND

@@ -37,7 +37,7 @@ chatnets = {
 
 channels = (
   { name = "#milo"; chatnet = "ebay"; autojoin = "yes"; },
-  { name = "#milo-data"; chatnet = "ebay"; autojoin = "yes"; },
+  { name = "#milo-data"; chatnet = "ebay"; autojoin = "yes"; }
 );
 
 aliases = {
