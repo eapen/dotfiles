@@ -1,4 +1,6 @@
 vim/backup/*
 vim/tmp/*
 vim/undo/*
+vim/.netrwhist
 bash_aliases
+bin/fixssh
