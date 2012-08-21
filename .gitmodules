@@ -30,10 +30,6 @@
     path = vim/bundle/pydoc
     url = https://github.com/fs111/pydoc.vim.git
 
-[submodule "py.test"]
-    path = vim/bundle/py.test
-    url = https://github.com/alfredodeza/pytest.vim.git
-
 [submodule "snipmate"]
     path = vim/bundle/snipmate
     url = https://github.com/msanders/snipmate.vim.git

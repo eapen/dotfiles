@@ -262,7 +262,8 @@ hi MBEVisibleNormal guifg=#5DC2D6 guibg=fg
 hi MBEChanged guifg=#CD5907 guibg=fg
 hi MBENormal guifg=#808080 guibg=fg
 
-let g:pyflakes_use_quickfix = 1
+let g:syntastic_python_checker = 'pylint'
+" let g:syntastic_python_checker_args = ''
 let g:pep8_map='<leader>8'
 
 " Tab completion

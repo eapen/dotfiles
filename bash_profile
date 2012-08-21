@@ -29,7 +29,7 @@ shopt -s cmdhist
 
 export PROMPT_COMMAND="history -n; history -a;$PROMPT_COMMAND"
 
-export PATH=$PATH:~/bin:~/.gem/ruby/1.9.1/bin
+export PATH=$PATH:~/bin:~/.local/bin:~/.gem/ruby/1.9.1/bin
 export PYTHONPATH=$PYTHONPATH
 export PYTHONSTARTUP=~/.pythonrc
 export WORKON_HOME="$HOME/.virtualenvs"
