@@ -1,4 +1,4 @@
-" .vimrc
+"h .vimrc
 " Copied from https://gist.github.com/1377245
 " or http://pastebin.com/jJQFxQpR
 " which was Copied from https://bitbucket.org/sjl/dotfiles/src/tip/vim/.vimrc
@@ -262,9 +262,14 @@ hi MBEVisibleNormal guifg=#5DC2D6 guibg=fg
 hi MBEChanged guifg=#CD5907 guibg=fg
 hi MBENormal guifg=#808080 guibg=fg
 
-let g:syntastic_python_checker = 'pylint'
-" let g:syntastic_python_checker_args = ''
 let g:pep8_map='<leader>8'
+
+"let g:flake8_ignore="E501,W293"
+"let g:flake8_max_line_length=99
+"let g:flake8_cmd="/opt/bin/flake8000"
+autocmd FileType python map <buffer> <leader>7 :call Flake8()<CR>
+
+autocmd BufWritePost *.py call Flake8()
 
 " Tab completion
 au FileType python set omnifunc=pythoncomplete#Complete
