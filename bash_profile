@@ -6,7 +6,7 @@ export TERM=screen-256color
 
 export EDITOR='vim'
 export PAGER=less
-export LESS='-S -R'
+#export LESS='-S -R'
 export GREP_OPTIONS='--color=auto'
 export LS_OPTIONS='-b --color=auto'
 
@@ -43,7 +43,7 @@ eval "`dircolors -b`"
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
@@ -102,6 +102,7 @@ alias pgfouine='~/pgfouine-1.2/pgfouine.php -file /var/log/pgsql > ~/pgfouine-1.
 
 alias xrd='xrdb -merge ~/.Xresources'
 alias tmux='tmux -2'
+alias less='vim -u /usr/share/vim/vim73/macros/less.vim'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -113,6 +114,14 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+function slc {
+    s1='ssh slcmilovm'
+    s2=$1
+    s3='.slc.ebay.com'
+    s=$s1$s2$s3
+    $s
+}
 
 # autocomplete ssh from bash_history
 complete -W "$(echo $(grep '^ssh ' ~/.bash_history | sort -u | sed 's/^ssh //'))" ssh
