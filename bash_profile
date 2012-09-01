@@ -9,6 +9,8 @@ export PAGER=less
 #export LESS='-S -R'
 export GREP_OPTIONS='--color=auto'
 export LS_OPTIONS='-b --color=auto'
+export ACK_OPTIONS='-i'
+export GRIN_ARGS='-C 2 --no-skip-dirs -i="*.py"'
 
 export HISTCONTROL=erasedups
 export HISTFILE=$HOME/.bash_history
@@ -95,14 +97,16 @@ fi
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 # some more ls aliases
-alias ack='ack-grep --type=python'
 alias ls="ls $LS_OPTIONS"
 alias p8='git diff --name-only HEAD | grep .py | xargs pep8'
 alias pgfouine='~/pgfouine-1.2/pgfouine.php -file /var/log/pgsql > ~/pgfouine-1.2/index.html;'
 
 alias xrd='xrdb -merge ~/.Xresources'
 alias tmux='tmux -2'
-alias less='vim -u /usr/share/vim/vim73/macros/less.vim'
+alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
+
+bind '"\e[A"':history-search-backward
+bind '"\e[B"':history-search-forward
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases

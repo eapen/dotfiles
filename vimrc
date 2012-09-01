@@ -120,9 +120,6 @@ set virtualedit+=block                                  " Allow cursor to move o
 set mousehide                                           " Hide the mouse when typing
 map <MouseMiddle> <esc>"*p                              " Paste text without formatting it
 
-" Highlight VCS Conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
 " Save when losing focus
 " au FocusLost * :wa
 
@@ -329,4 +326,4 @@ if 'VIRTUAL_ENV' in os.environ:
     execfile(activate_this, dict(__file__=activate_this))
 EOF
 
-set tags=~/mytags,~/devtags
+set tags=~/mytags
