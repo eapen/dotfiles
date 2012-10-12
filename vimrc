@@ -122,6 +122,7 @@ map <MouseMiddle> <esc>"*p                              " Paste text without for
 
 " Save when losing focus
 " au FocusLost * :wa
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
 " Resize vim windows when terminal window is resized
 au VimResized * exe "normal! \<C-W>="
@@ -237,7 +238,7 @@ inoremap <c-e> <esc>A
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Open a quickfix window for the last search.
-nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen <CR>
 
 " Ack for the last search.
 nnoremap <silent> <leader>? :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b",
@@ -265,6 +266,14 @@ let g:pep8_map='<leader>8'
 "let g:flake8_max_line_length=99
 "let g:flake8_cmd="/opt/bin/flake8000"
 autocmd FileType python map <buffer> <leader>7 :call Flake8()<CR>
+
+au FileType qf call AdjustWindowHeight(3, 10)
+function! AdjustWindowHeight(minheight, maxheight)
+    exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+endfunction
+
+" http://stackoverflow.com/questions/6726783/changing-default-position-of-quickfix-window-in-vim
+autocmd FileType qf wincmd J
 
 autocmd BufWritePost *.py call Flake8()
 
@@ -297,6 +306,7 @@ function! RemoveTrailingWhitespace()
     endif
 endfunction
 " autocmd BufWritePre * call RemoveTrailingWhitespace()
+nnoremap <silent> <leader>tws :call RemoveTrailingWhitespace()<CR>
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/

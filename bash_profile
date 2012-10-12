@@ -104,6 +104,7 @@ alias pgfouine='~/pgfouine-1.2/pgfouine.php -file /var/log/pgsql > ~/pgfouine-1.
 alias xrd='xrdb -merge ~/.Xresources'
 alias tmux='tmux -2'
 alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
+alias portscan='nmap 10.254.233.0/24 -p8080 | grep -B4 "tcp open"'
 
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
@@ -129,6 +130,9 @@ function slc {
 
 # autocomplete ssh from bash_history
 complete -W "$(echo $(grep '^ssh ' ~/.bash_history | sort -u | sed 's/^ssh //'))" ssh
+
+# autocomplete sqlite filenames
+complete -G "*.db" sqlite3
 
 source $HOME/.bashrc_private
 source $HOME/.git_completion

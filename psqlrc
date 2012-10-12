@@ -2,3 +2,5 @@
 \x
 \set HISTSIZE 9999
 \set HISTCONTROL ignoreboth
+\pset null 'NULL'
+\encoding unicode

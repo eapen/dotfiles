@@ -22,6 +22,7 @@ ln -s $DOTFILES/psqlrc .psqlrc
 ln -s $DOTFILES/pythonrc .pythonrc
 ln -s $DOTFILES/scripts .scripts
 ln -s $DOTFILES/selected_editor .selected_editor
+ln -s $DOTFILES/sqliterc .sqliterc
 ln -s $DOTFILES/tmux.conf .tmux.conf
 ln -s $DOTFILES/vim .vim
 ln -s $DOTFILES/vimrc .vimrc
