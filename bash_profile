@@ -108,6 +108,8 @@ alias portscan='nmap 10.254.233.0/24 -p8080 | grep -B4 "tcp open"'
 
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
+set show-all-if-ambiguous on
+set completion-ignore-case on
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -121,9 +123,17 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 function slc {
-    s1='ssh slcmilovm'
+    s1='ssh slcmilo'
     s2=$1
     s3='.slc.ebay.com'
+    s=$s1$s2$s3
+    $s
+}
+
+function phx {
+    s1='ssh phxmilo'
+    s2=$1
+    s3='.phx.ebay.com'
     s=$s1$s2$s3
     $s
 }

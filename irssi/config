@@ -222,7 +222,7 @@ settings = {
     beep_when_window_active = "yes";
     autofocus_new_items = "yes";
     autolog = "yes";
-    autolog_level = "all -crap -clientcrap -ctcps";
+    autolog_level = "all -crap -clientcrap -ctcps -parts -quits";
     bell_beeps = "yes";
     beep_msg_level = "MSGS DCC DCCMSGS HIGHLIGHT";
   };
@@ -266,5 +266,7 @@ logs = { };
 ignores = (
   { mask = "milo-robot"; level = "ALL"; },
   { level = "PARTS NICKS"; channels = ( "#milo-data" ); },
-  { level = "PARTS NICKS"; channels = ( "#milo" ); }
+  { level = "PARTS NICKS"; channels = ( "#milo" ); },
+  { mask = "PARTS"; level = "ALL"; },
+  { mask = "quits"; level = "ALL"; }
 );
