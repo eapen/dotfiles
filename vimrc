@@ -99,7 +99,7 @@ set report=0                " : commands always print changed line count.
 " Colorscheme ---------------------------------------- {{{
 syntax on                                               " Syntax highlighting on
 set t_Co=256
-set background=dark                                     " Changes highlighting to look better on dark bg
+set background=light                                     " Changes highlighting to look better on dark bg
 colorscheme solarized
 
 " }}}
