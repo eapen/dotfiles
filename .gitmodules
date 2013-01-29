@@ -19,8 +19,8 @@
     url = https://github.com/sjl/gundo.vim.git
 
 [submodule "minibufexpl"]
-	path = vim/bundle/minibufexpl
-	url = https://github.com/sontek/minibufexpl.vim.git
+    path = vim/bundle/minibufexpl
+    url = https://github.com/sontek/minibufexpl.vim.git
 
 [submodule "pep8"]
     path = vim/bundle/pep8

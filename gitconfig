@@ -1,6 +1,6 @@
 [user]
-	name = NAME
-	email = EMAIL
+	name = Eapen
+	email =
 [core]
 	#autocrlf = input
 	excludesfile = /home/eapen/.gitignore
