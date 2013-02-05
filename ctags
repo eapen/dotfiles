@@ -1,2 +1,4 @@
 --python-kinds=-i
 --exclude=*.js
+--exclude=*/build/*
+--exclude=*.html

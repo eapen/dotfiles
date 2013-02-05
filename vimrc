@@ -4,16 +4,61 @@
 " which was Copied from https://bitbucket.org/sjl/dotfiles/src/tip/vim/.vimrc
 " http://sontek.net/turning-vim-into-a-modern-python-ide
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+" https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
+" https://github.com/gmarik/vundle#about
 
 " Preamble ------------------------------------------- {{{
 
-filetype off
-call pathogen#helptags()                                " Pathogen help tags
-call pathogen#infect()                                  " Enable 'Pathogen' plugin.(Vim plugin manager)
+set nocompatible                                          " Don't use Vi compatibility
+filetype off                                              " required
+
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+" Let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+" My bundles here:
+"
+" original repos on github
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'mileszs/ack.vim'
+Bundle 'kien/ctrlp.vim'
+Bundle 'sjl/gundo.vim'
+Bundle 'sontek/minibufexpl.vim'
+Bundle 'vim-scripts/pep8'
+Bundle 'fs111/pydoc.vim'
+Bundle 'kevinw/pyflakes-vim'
+Bundle 'msanders/snipmate.vim'
+" Bundle 'ervandew/supertab'
+Bundle 'vim-scripts/TaskList.vim'
+Bundle 'erikw/tmux-powerline'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'nvie/vim-flake8'
+Bundle 'tpope/vim-surround'
+Bundle 'Valloric/YouCompleteMe'
+
+" vim-scripts repos
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+" non github repos
+" Bundle 'git://git.wincent.com/command-t.git'
+
 filetype plugin on                                      " Load plugin if one exists for current filetype
 filetype plugin indent on                               " Load indent pluing if one exists for current ft. Disable auto-indenting
-set nocompatible                                        " Don't use Vi compatibility
 
+" Brief help
+" :BundLeList - list configured bundles
+" :BundLeInstall(!) - install(update) bundles
+" :BundLeSearch(!) foo - searc(or referesh cache first) for foo
+" :BundLeClean(!)  - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+"
 " }}}
 " Basic options -------------------------------------- {{{
 set encoding=utf-8                                      " Set encoding inside vim to 32bit UTF-8 encoded Unicode

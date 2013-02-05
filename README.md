@@ -2,8 +2,7 @@
 
 Clone this repo from your home directory (~):
 1. `cd dotfiles`
-2. run `git submodule init`, `git submodule update`
-3. run `./dotfiles/symbolic_links.sh`
+2. run `./dotfiles/symbolic_links.sh`
 
 ### Notes:
 Copying gitconfig so i can use my email without worrying about it getting harvested
