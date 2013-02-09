@@ -1,4 +1,4 @@
-"h .vimrc
+" .vimrc
 " Copied from https://gist.github.com/1377245
 " or http://pastebin.com/jJQFxQpR
 " which was Copied from https://bitbucket.org/sjl/dotfiles/src/tip/vim/.vimrc
@@ -11,6 +11,9 @@
 
 set nocompatible                                          " Don't use Vi compatibility
 filetype off                                              " required
+let python_highlight_all = 1
+let python_print_as_function = 1
+let g:Powerline_symbols='fancy'
 
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
@@ -24,15 +27,14 @@ Bundle 'gmarik/vundle'
 " original repos on github
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'mileszs/ack.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'sontek/minibufexpl.vim'
 Bundle 'vim-scripts/pep8'
 Bundle 'fs111/pydoc.vim'
-Bundle 'kevinw/pyflakes-vim'
-Bundle 'msanders/snipmate.vim'
+" Bundle 'kevinw/pyflakes-vim'
+" Bundle 'msanders/snipmate.vim'
 " Bundle 'ervandew/supertab'
 Bundle 'vim-scripts/TaskList.vim'
 Bundle 'erikw/tmux-powerline'
@@ -40,10 +42,13 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'nvie/vim-flake8'
 Bundle 'tpope/vim-surround'
 Bundle 'Valloric/YouCompleteMe'
+"Bundle 'alfredodeza/khuno.vim'
+Bundle 'scrooloose/syntastic'
 
 " vim-scripts repos
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+" Bundle 'L9'
+" Bundle 'FuzzyFinder'
+
 " non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
 
@@ -132,7 +137,7 @@ set shiftwidth=4                                        " Use 4 spaces for each 
 set softtabstop=4                                       " Tabs count for 4 spaces in edit mode
 set expandtab                                           " Expand tabs to spaces
 set nowrap                                                " Word wrapping on/off
-"set smarttab                                            " Insert tabs on the start of a line according to shiftwidth, not tabstop
+set smarttab                                            " Insert tabs on the start of a line according to shiftwidth, not tabstop
 set shiftround                                          " Use multiples of shiftwidth when indenting with < and >
 set textwidth=80                                        " Break line after 80 characters (on whitespace only)
 set whichwrap=b,s,h,l,<,>,[,]                           " Move freely between files
@@ -155,12 +160,60 @@ set showmatch                                           " Show matching brackets
 set incsearch                                           " Jump to search results as they're typed
 set hlsearch                                            " Highlight all search matches
 set gdefault                                            " Make global flag default when searching
+set scrolljump=5                                        " jump 5 lines when running out of screen
 set scrolloff=5                                         " Keep 5 lines of context at the top/bottom
 set sidescrolloff=5                                     " Keep 5 lines of context at the sides
 set virtualedit+=block                                  " Allow cursor to move outside char boundaries(in visual block)A
 
 " }}}
 " Misc settings/mappings ----------------------------- {{{
+
+augroup ft_html
+    au!
+    au BufNewFile,BufRead *.html setlocal filetype=htmldjango shiftwidth=2 softtabstop=2
+    au FileType html,jinja,htmldjango setlocal foldmethod=manual " noexpandtab
+    au FileType html,jinja,htmldjango nnoremap <buffer> <localleader>f Vatzf
+augroup END
+
+augroup ft_quickfix
+    au!
+    au Filetype qf setlocal colorcolumn=0 nolist nocursorline nowrap nonumber norelativenumber
+augroup END
+
+augroup ft_python
+    au!
+    au FileType python setlocal autoindent shiftwidth=4 tabstop=4 sta expandtab textwidth=79 omnifunc=RopeCompleteFunc
+augroup END
+
+augroup ft_vim
+    au!
+    au FileType vim setlocal foldmethod=marker
+    au FileType help setlocal textwidth=78
+
+    " always open help files in the top split
+    au BufWinEnter *.txt if &ft == 'help' | wincmd K | endif
+augroup END
+
+augroup ft_django
+    au!
+    au BufNewFile,BufRead urls.py setlocal nowrap textwidth=0
+    au BufNewFile,BufRead urls.py setlocal filetype=python.django
+augroup END
+
+" use two space tabs for ruby
+autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 et
+
+augroup ft_css
+    au!
+    au FileType css setlocal iskeyword+=- " noexpandtab
+    au BufEnter *.css setlocal listchars=tab:·\ ,trail:-
+    au BufNewFile,BufRead *.css inoremap <buffer> {<cr> {}<left><cr><tab>.<cr><esc>kA<bs>
+augroup END
+
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" restart where we were last
+autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 set mousehide                                           " Hide the mouse when typing
 map <MouseMiddle> <esc>"*p                              " Paste text without formatting it
@@ -179,11 +232,6 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_working_path_mode = 2
 set wildignore+=*/.git/*
 
-let g:Powerline_symbols = 'fancy'
-
-map <leader>j :RopeGotoDefinition<CR>
-map <leader>r :RopeRename<CR>
-
 nmap <leader>a <Esc>:Ack!
 
 " <leader><space> clears all highlighting
@@ -197,14 +245,6 @@ nnoremap <leader>w :%s/\s\+$//g<cr>:let @/=''<cr>
 " Use <leader>rt to retab the file with tabstop=4
 "   Sets tab width to 4, and then converts all tabs to spaces
 nnoremap <leader>rt :set ts=4<cr>:%retab<cr>
-
-" Mapp arrow keys to window resizing
-"if bufwinnr(1)
-"    map <Up> <C-W>-
-"    map <Down> <C-W>+
-"    map <Left> <C-W><
-"    map <Right> <C-W>>
-"endif
 
 " Useful for when 'wrap' is set. Instead of moving to the real next line,
 "  j (or k) moves down (or up) to the next *row* of text
@@ -222,6 +262,12 @@ augroup END
 " Additional mappings -------------------------------- {{{
 " map Y to act like D and C , yank until EOL, rather than as yy
 map Y y$
+map I i
+
+
+" let g:syntastic_python_checker_args = '--ignore=E261,E501'
+let g:syntastic_auto_jump=0
+let g:syntastic_check_on_open=1
 
 let Tlist_Ctags_Cmd='/usr/bin/ctags'
 
@@ -251,11 +297,6 @@ vnoremap  #  y?<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 nnoremap <C-W>O :echo "sucker"<CR>
 nnoremap <C-W>o :echo "sucka"<CR>
 nnoremap <C-W><C-O> :echo "sucks for you"<CR>
-
-map <C-kPlus> <C-w>+
-map <C-kMinus> <C-w>-
-map <C-S-kPlus> <C-w>_
-map <C-S-kMinus> <C-w>_
 
 cmap w!! w !sudo tee % >/dev/null
 
@@ -305,12 +346,13 @@ hi MBEVisibleNormal guifg=#5DC2D6 guibg=fg
 hi MBEChanged guifg=#CD5907 guibg=fg
 hi MBENormal guifg=#808080 guibg=fg
 
-let g:pep8_map='<leader>8'
+"let g:syntastic_check_on_open
 
 "let g:flake8_ignore="E501,W293"
 "let g:flake8_max_line_length=99
 "let g:flake8_cmd="/opt/bin/flake8000"
 autocmd FileType python map <buffer> <leader>7 :call Flake8()<CR>
+autocmd BufWritePost *.py call Flake8()
 
 au FileType qf call AdjustWindowHeight(3, 10)
 function! AdjustWindowHeight(minheight, maxheight)
@@ -320,11 +362,9 @@ endfunction
 " http://stackoverflow.com/questions/6726783/changing-default-position-of-quickfix-window-in-vim
 autocmd FileType qf wincmd J
 
-autocmd BufWritePost *.py call Flake8()
 
 " Tab completion
-au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "Context"
+" au FileType python set omnifunc=pythoncomplete#Complete
 
 set completeopt=menuone,longest,preview
 
@@ -332,7 +372,19 @@ let g:netrw_list_hide='\.pyc$'                          " Ignore these filetypes
 
 " Allow backspacing over autoindent, line breaks and start of insert action
 " Filespecific indenting
-set showmatch " show matching paranthesis
+set showmatch " briefly jump to matching bracket when entering the closing pair
+
+" just in case the host termcap on this machine sucks, give me color.
+if &term =~ "xterm" || &term =~ "screen"
+    set t_Co=256
+    if has("terminfo")
+        set t_Sf=[3%p1%dm
+        set t_Sb=[4%p1%dm
+    else
+        set t_Sf=[3%dm
+        set t_Sb=[4%dm
+    endif
+endif
 
 set statusline=%t\ %1*%m%*\ %1*%r%*\ %2*%h%*%w%=%l%3*/%L(%p%%)%*,%c%V]\ [%b:0x%B]\ [%{&ft==''?'TEXT':toupper(&ft)},%{toupper(&ff)},%{toupper(&fenc!=''?&fenc:&enc)}%{fugitive#statusline()}%{&bomb?',BOM':''}%{&eol?'':',NOEOL'}]
 "let statusline=' %t %{&mod?(&ro?"*":"+"):(&ro?"=":" ")} %1*|%* %{&ft==""?"any":&ft} %1*|%* %{&ff} %1*|%* %{(&fenc=="")?&enc:&fenc}%{(&bomb?",BOM":"")} %1*|%* %=%1*|%* 0x%B %1*|%* (%l,%c%V) %1*|%* %L %1*|%* %P'
@@ -360,6 +412,8 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 " autocmd BufWritePost *.py call Pep8()
+
+highlight SpellBad term=underline cterm=underline ctermbg=1
 
 if has("gui_running")
     highlight SpellBad term=underline gui=undercurl guisp=Orange
