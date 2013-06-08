@@ -1,6 +1,6 @@
 \timing
 \x
-\set HISTSIZE 9999
+\set HISTSIZE
 \set HISTCONTROL ignoreboth
-\pset null 'NULL'
+\pset null 'NILL'
 \encoding unicode

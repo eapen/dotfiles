@@ -1,7 +1,6 @@
 import atexit
 import os
 import re
-import readline
 import rlcompleter
 import socket
 import _socket
@@ -9,9 +8,19 @@ import sys
 import time
 import timeit
 
+try:
+    import readline
+except ImportError:
+    import pyreadline as readline
+else:
+    import rlcompleter
+    if(sys.platform == 'darwin'):
+        readline.parse_and_bind ("bind ^I rl_complete")
+    else:
+        readline.parse_and_bind("tab: complete")
+
 history = os.path.expanduser('~/.pythonhist')
 readline.read_history_file(history)
-readline.parse_and_bind('tab: complete')
 atexit.register(readline.write_history_file, history)
 
 def t(*args):

@@ -14,9 +14,9 @@ export GRIN_ARGS='-C 2 --no-skip-dirs -i="*.py"'
 
 export HISTCONTROL=erasedups
 export HISTFILE=$HOME/.bash_history
-export HISTFILESIZE=50000
+export HISTFILESIZE=
 export HISTIGNORE=
-export HISTSIZE=50000
+export HISTSIZE=
 export HISTTIMEFORMAT="%a %b %Y %T %z "
 
 typeset -r HISTCONTROL

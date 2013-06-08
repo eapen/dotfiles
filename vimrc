@@ -41,9 +41,10 @@ Bundle 'erikw/tmux-powerline'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'nvie/vim-flake8'
 Bundle 'tpope/vim-surround'
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 "Bundle 'alfredodeza/khuno.vim'
 Bundle 'scrooloose/syntastic'
+Bundle 'airblade/vim-gitgutter'
 
 " vim-scripts repos
 " Bundle 'L9'
