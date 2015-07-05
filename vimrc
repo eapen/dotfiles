@@ -263,7 +263,8 @@ augroup END
 " Additional mappings -------------------------------- {{{
 " map Y to act like D and C , yank until EOL, rather than as yy
 map Y y$
-map I i
+" this messes up visual block inserts
+" map I i
 
 
 " let g:syntastic_python_checker_args = '--ignore=E261,E501'

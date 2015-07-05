@@ -1,1 +1,1 @@
-/home/eapen/dotfiles/emacs.d
+/home/geapen/dotfiles/emacs.d

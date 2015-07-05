@@ -35,10 +35,11 @@ export PIP_DOWNLOAD_CACHE=~/.pip_download_cache
 export PATH=$PATH:/usr/local/sbin:/us/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin:~/.local/bin
 export PYTHONPATH=$PYTHONPATH
 export PYTHONSTARTUP=~/.pythonrc
-# if [ $USER == "geapen" ]; then
-#     export WORKON_HOME="$HOME/.virtualenvs"
-#     source /usr/local/bin/virtualenvwrapper.sh
-# fi
+if [ $USER == "geapen" ]; then
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/develop
+    source /usr/local/bin/virtualenvwrapper_lazy.sh
+fi
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
