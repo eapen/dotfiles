@@ -14,10 +14,10 @@ except ImportError:
     import pyreadline as readline
 else:
     import rlcompleter
-    if(sys.platform == 'darwin'):
-        readline.parse_and_bind ("bind ^I rl_complete")
-    else:
-        readline.parse_and_bind("tab: complete")
+    #if(sys.platform == 'darwin'):
+    #    readline.parse_and_bind ("bind ^I rl_complete")
+    #else:
+    #    readline.parse_and_bind("tab: complete")
 
 history = os.path.expanduser('~/.pythonhist')
 readline.read_history_file(history)

@@ -1,6 +1,5 @@
 # ~/.bash_profile: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-. $HOME/.ssh/ssh-login
 
 export TERM=screen-256color
 
@@ -12,7 +11,7 @@ export LS_OPTIONS='-b --color=auto'
 export ACK_OPTIONS='-i'
 export GRIN_ARGS='-C 2 --no-skip-dirs -i="*.py"'
 
-export HISTCONTROL=erasedups
+#export HISTCONTROL=erasedups
 export HISTFILE=$HOME/.bash_history
 export HISTFILESIZE=
 export HISTIGNORE=
@@ -29,21 +28,28 @@ typeset -r HISTTIMEFORMAT
 shopt -s histappend
 shopt -s cmdhist
 
-export PROMPT_COMMAND="history -n; history -a;$PROMPT_COMMAND;"
+export WORKON_HOME=~/.virtualenvs
+source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 export PIP_DOWNLOAD_CACHE=~/.pip_download_cache
-export PATH=$PATH:/usr/local/sbin:/us/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin:~/.local/bin
 export PYTHONPATH=$PYTHONPATH
 export PYTHONSTARTUP=~/.pythonrc
+export GOPATH=$HOME/develop/go
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home/
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/
+export M3_HOME=/usr/local/Cellar/maven/3.3.3
+export M3=$M3_HOME/bin
+export MAVEN_OPTS="-Xms256m -Xmx512m"
+export ADB_PATH=/Users/geapen/Library/Android/sdk/platform-tools/
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin:$M3:$ADB_PATH:$GOPATH/bin:/usr/local/share/google/google-cloud-sdk/bin/
 if [ $USER == "geapen" ]; then
-    export WORKON_HOME=$HOME/.virtualenvs
-    export PROJECT_HOME=$HOME/develop
-    source /usr/local/bin/virtualenvwrapper_lazy.sh
+   export WORKON_HOME="$HOME/.virtualenvs"
+   source /usr/local/bin/virtualenvwrapper_lazy.sh
 fi
 
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
-eval "`dircolors -b`"
+#[ -z "$PS1" ] && return
+#eval "`dircolors -b`"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -101,19 +107,17 @@ fi
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 # some more ls aliases
-alias ls="ls $LS_OPTIONS"
-alias p8='git diff --name-only HEAD | grep .py | xargs pep8'
-alias pgfouine='~/pgfouine-1.2/pgfouine.php -file /var/log/pgsql > ~/pgfouine-1.2/index.html;'
+# alias ls="ls $LS_OPTIONS"
 
-alias xrd='xrdb -merge ~/.Xresources'
 alias tmux='tmux -2'
 alias vless='vim -u /usr/share/vim/vim73/macros/less.vim'
 alias portscan='nmap 10.254.233.0/24 -p8080 | grep -B4 "tcp open"'
+alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
-set show-all-if-ambiguous on
-set completion-ignore-case on
+#set show-all-if-ambiguous on
+#set completion-ignore-case on
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -126,28 +130,24 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-function slc {
-    s1='ssh slcmilo'
-    s2=$1
-    s3='.slc.ebay.com'
-    s=$s1$s2$s3
-    $s
-}
-
-function phx {
-    s1='ssh phxmilo'
-    s2=$1
-    s3='.phx.ebay.com'
-    s=$s1$s2$s3
-    $s
-}
-
 # autocomplete ssh from bash_history
-complete -W "$(echo $(grep '^ssh ' ~/.bash_history | sort -u | sed 's/^ssh //'))" ssh
+#complete -W "$(echo $(grep '^ssh ' ~/.bash_history | sort -u | sed 's/^ssh //'))" ssh
 
 # autocomplete sqlite filenames
-complete -G "*.db" sqlite3
+#complete -G "*.db" sqlite3
 
 source $HOME/.bashrc_private
 source $HOME/.git_completion
 source $HOME/.bash_gitprompt
+
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUPSTREAM=auto
+
+#export PROMPT_COMMAND='history -n; history -a; __git_ps1 "\u@\h:\w" "\\\$ "'
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/geapen/develop/google-cloud-sdk/path.bash.inc'
+
+# The next line enables bash completion for gcloud.
+source '/Users/geapen/develop/google-cloud-sdk/completion.bash.inc'

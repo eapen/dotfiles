@@ -88,7 +88,7 @@ set number                                              " Turn on line numbers
 " set relativenumber
 set laststatus=2                                        " Always show status bar (w/ filename)
 set notimeout ttimeout ttimeoutlen=200                  " quickly time out on keycodes, but never on mappings
-set history=99999                                       " Remember 1000 lines of command
+" set history=99999                                       " Remember 1000 lines of command
 set undoreload=10000                                    " Save whole buffer for undo when reloading it
 set undofile                                            " Specify new locate for vim7.3 persistent undo file
 set undodir=~/.vim/undo                                 " Put undo history into ~/.vim/.undo
@@ -97,7 +97,7 @@ set backup                                              " Turn backups on
 set backupdir=~/.vim/backup                             " Where to keep backup files
 set directory=~/.vim/tmp                                " Where to keep swap files
 set list listchars=tab:>-,trail:.,extends:>,precedes:<  " Show tabs as >- and trailing space as ~
-set shell=/bin/bash
+set shell=/usr/local/bin/zsh
 set lazyredraw                                          " Don't redraw screen when executing macros/untyped cmds
 set matchtime=2
 set showbreak=↪
@@ -150,7 +150,7 @@ set report=0                " : commands always print changed line count.
 " Colorscheme ---------------------------------------- {{{
 syntax on                                               " Syntax highlighting on
 set t_Co=256
-set background=light                                     " Changes highlighting to look better on dark bg
+set background=dark                                     " Changes highlighting to look better on dark bg
 colorscheme solarized
 
 " }}}
@@ -265,7 +265,6 @@ augroup END
 map Y y$
 " this messes up visual block inserts
 " map I i
-
 
 " let g:syntastic_python_checker_args = '--ignore=E261,E501'
 let g:syntastic_auto_jump=0

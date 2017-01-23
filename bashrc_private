@@ -3,4 +3,12 @@ export DEBFULLNAME=''
 
 export PGPASSWORD=''
 
-export PYTHONPATH=~/develop
+export PYTHONPATH=~/develop/
+
+function pssh {
+    machines=`findpool -s $1`
+    RETVAL=$?
+    if [ $RETVAL -eq 0 ]; then
+        cssh -lUSERNAME $machines
+    fi
+}
