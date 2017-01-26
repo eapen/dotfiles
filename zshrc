@@ -6,6 +6,7 @@ export ZSH=/Users/geapen/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="powerline"
+source /usr/local/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
