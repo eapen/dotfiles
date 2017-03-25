@@ -28,5 +28,6 @@ ln -fs $DOTFILES/vim $HOME/.vim
 ln -fs $DOTFILES/vimrc $HOME/.vimrc
 ln -fs $DOTFILES/Xresources $HOME/.Xresources
 ln -fs $DOTFILES/bin/ssh-login $HOME/.ssh/ssh-login
+ln -fs $DOTFILES/config $HOME/.config
 touch $HOME/.bash_history
 touch $HOME/.pythonhist
