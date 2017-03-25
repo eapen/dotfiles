@@ -1,12 +1,73 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/geapen/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="powerline"
-source /usr/local/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
+zsh_internet_signal(){
+  ######################################################3
+  #  local output=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -I) 
+  #  local airport=$(echo $output | grep 'AirPort' | awk -F': ' '{print $2}')
+  #
+  #  if [ "$airport" = "Off" ]; then
+  #          local color='%F{yellow}'
+  #          echo -n "%{$color%}Wifi Off"
+  #  else
+  #          local ssid=$(echo $output | grep ' SSID' | awk -F': ' '{print $2}')
+  #          local speed=$(echo $output | grep 'lastTxRate' | awk -F': ' '{print $2}')
+  #          local color='%F{yellow}'
+  #
+  #          [[ $speed -gt 100 ]] && color='%F{green}'
+  #          [[ $speed -lt 50 ]] && color='%F{red}'
+  #
+  #          echo -n "%{$color%}$speed Mb/s%{%f%}" # removed char not in my PowerLine font 
+  #  fi
+  #
+  ######################################################3
+  #source on quality levels - http://www.wireless-nets.com/resources/tutorials/define_SNR_values.html
+  #source on signal levels  - http://www.speedguide.net/faq/how-to-read-rssisignal-and-snrnoise-ratings-440
+  local signal=$(airport -I | grep agrCtlRSSI | awk '{print $2}' | sed 's/-//g')
+  local noise=$(airport -I | grep agrCtlNoise | awk '{print $2}' | sed 's/-//g')
+  local SNR=$(bc <<<"scale=2; $signal / $noise")
+
+  local net=$(curl -D- -o /dev/null -s http://www.google.com | grep HTTP/1.1 | awk '{print $2}')
+  local color='%F{yellow}'
+  # local symbol="\uf197"
+  local symbol="\ue868"
+
+  # Excellent Signal (5 bars)
+  if [[ ! -z "${signal// }" ]] && [[ $SNR -gt .40 ]] ; 
+    then color='%F{blue}' ; symbol="\uf1eb" ;
+  fi
+
+  # Good Signal (3-4 bars)
+  if [[ ! -z "${signal// }" ]] && [[ ! $SNR -gt .40 ]] && [[ $SNR -gt .25 ]] ; 
+    then color='%F{green}' ; symbol="\uf1eb" ;
+  fi
+
+  # Low Signal (2 bars)
+  if [[ ! -z "${signal// }" ]] && [[ ! $SNR -gt .25 ]] && [[ $SNR -gt .15 ]] ; 
+    then color='%F{yellow}' ; symbol="\uf1eb" ;
+  fi
+
+  # Very Low Signal (1 bar)
+  if [[ ! -z "${signal// }" ]] && [[ ! $SNR -gt .15 ]] && [[ $SNR -gt .10 ]] ; 
+    then color='%F{red}' ; symbol="\uf1eb" ;
+  fi
+
+  # No Signal - No Internet
+  if [[ ! -z "${signal// }" ]] && [[ ! $SNR -gt .10 ]] ; 
+    then color='%F{red}' ; symbol="\uf011";
+  fi
+
+  if [[ -z "${signal// }" ]] && [[ "$net" -ne 200 ]] ; 
+    then color='%F{red}' ; symbol="\uf011" ;
+  fi
+
+  # Ethernet Connection (no wifi, hardline)
+  if [[ -z "${signal// }" ]] && [[ "$net" -eq 200 ]] ; 
+    then color='%F{blue}' ; symbol="\uf197" ;
+  fi
+
+  echo -n "%{$color%}$symbol " # \f1eb is wifi bars
+}
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -28,7 +89,7 @@ source /usr/local/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.z
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -54,17 +115,35 @@ plugins=(mp3 git ssh-agent tmux virtuanenvwrapper python pylint pyenv pep8 osx m
 
 # User configuration
 
-export PATH="/Users/geapen/bin:/Users/geapen/develop/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/Users/geapen/bin:/usr/local/Cellar/maven/3.3.3/bin:/Users/geapen/Library/Android/sdk/platform-tools/:/Users/geapen/develop/go/bin:/usr/local/share/google/google-cloud-sdk/bin/"
+export PATH="/Users/geapen/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/sbin:/sbin:/usr/local/Cellar/maven/3.3.3/bin:/Users/geapen/Library/Android/sdk/platform-tools/:/Users/geapen/develop/go/bin:/usr/local/share/google/google-cloud-sdk/bin/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-export ZSH_TMUX_AUTOSTART=true
+export ZSH_TMUX_AUTOSTART=false
 
-export POWERLINE_RIGHT_A="exit-status-on-fail"
-export POWERLINE_HIDE_USER_NAME="true"
-export POWERLINE_HIDE_HOST_NAME="true"
-export POWERLINE_NO_BLANK_LINE="true"
-export POWERLINE_PATH="short"
-export POWERLINE_DETECT_SSH="true"
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S \uE868 %d.%m.%y}"
+POWERLEVEL9K_CUSTOM_INTERNET_SIGNAL="zsh_internet_signal"
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=3
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=1
+POWERLEVEL9K_STATUS_VERBOSE=false
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='yellow'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
+POWERLEVEL9K_MODE='awesome-patched'
+# POWERLEVEL9K_MODE='awesome-fontconfig'
+POWERLEVEL9K_HIDE_BRANCH_ICON=true
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs virtualenv docker_machine) # https://github.com/bhilburn/powerlevel9k
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time status rbenv time load)
+export POWERLINE_CONFIG_COMMAND=powerline-config
+source /usr/local/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
+
+ZSH_THEME="powerlevel9k/powerlevel9k"
+
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -92,11 +171,13 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="subl ~/.zshrc"
 alias envconfig="subl ~/Projects/config/env.sh"
 alias ohmyzsh="subl ~/.oh-my-zsh"
-plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting mp3 cp tmux)
-export HOMEBREW_GITHUB_API_TOKEN="UPDATE_ME"
+plugins=(git colored-man colorize github jira vagrant virtualenv virtualenvwrapper pip python brew osx zsh-syntax-highlighting mp3 cp tmux)
 export NVM_DIR="/Users/geapen/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+
+export WORKON_HOME=~/.virtualenvs
+source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 # docker-machine start default
 # eval $(docker-machine env default)
