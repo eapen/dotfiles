@@ -16,6 +16,7 @@ let python_print_as_function = 1
 let g:Powerline_symbols='fancy'
 
 set rtp+=~/.vim/bundle/vundle
+set rtp+=/usr/local/opt/fzf
 call vundle#rc()
 
 " Let Vundle manage Vundle
