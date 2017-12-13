@@ -1,6 +1,9 @@
 DOTFILES=$HOME/dotfiles
 echo "Linking to" $DOTFILES
 
+ln -fs $DOTFILES/zpreztorc $HOME/.zpreztorc
+mkdir -p $HOME/.zprezto/contrib
+ln -s $DOTFILES/zprezto/contrib $HOME/.zprezto/contrib
 #ln -s $DOTFILES/bash_aliases .bash_aliases
 ln -fs $DOTFILES/bash_gitprompt $HOME/.bash_gitprompt
 ln -fs $DOTFILES/bash_logout $HOME/.bash_logout
@@ -13,6 +16,7 @@ ln -fs $DOTFILES/dircolors $HOME/.dircolors
 ln -fs $DOTFILES/emacs.d $HOME/.emacs.d
 ln -fs $DOTFILES/fonts $HOME/.fonts
 ln -fs $DOTFILES/git_completion $HOME/.git_completion
+cp $DOTFILES/gitconfig $HOME/.gitconfig
 cp $DOTFILES/gitconfig $HOME/.gitconfig
 ln -fs $DOTFILES/gitignore $HOME/.gitignore
 ln -fs $DOTFILES/gitk $HOME/.gitk

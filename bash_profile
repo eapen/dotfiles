@@ -41,7 +41,7 @@ export M3_HOME=/usr/local/Cellar/maven/3.3.3
 export M3=$M3_HOME/bin
 export MAVEN_OPTS="-Xms256m -Xmx512m"
 export ADB_PATH=/Users/geapen/Library/Android/sdk/platform-tools/
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin:$M3:$ADB_PATH:$GOPATH/bin:/usr/local/share/google/google-cloud-sdk/bin/
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/bin:$M3:$ADB_PATH:$GOPATH/bin:/usr/local/share/google/google-cloud-sdk/bin/:/usr/local/bin/python3:/usr/local/bin/python
 if [ $USER == "geapen" ]; then
    export WORKON_HOME="$HOME/.virtualenvs"
    source /usr/local/bin/virtualenvwrapper_lazy.sh

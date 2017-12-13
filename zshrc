@@ -1,5 +1,4 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/geapen/.oh-my-zsh
 
 zsh_internet_signal(){
   ######################################################3
@@ -115,7 +114,6 @@ plugins=(mp3 git ssh-agent tmux virtuanenvwrapper python pylint pyenv pep8 osx m
 
 # User configuration
 
-export PATH="/Users/geapen/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/sbin:/sbin:/usr/local/Cellar/maven/3.3.3/bin:/Users/geapen/Library/Android/sdk/platform-tools/:/Users/geapen/develop/go/bin:/usr/local/share/google/google-cloud-sdk/bin/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 export ZSH_TMUX_AUTOSTART=false
@@ -192,8 +190,6 @@ PERL_LOCAL_LIB_ROOT="/Users/geapen/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB
 PERL_MB_OPT="--install_base \"/Users/geapen/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/geapen/perl5"; export PERL_MM_OPT;
 export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
-
-export PATH="$HOME/.yarn/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
