@@ -3,7 +3,7 @@ echo "Linking to" $DOTFILES
 
 ln -fs $DOTFILES/zpreztorc $HOME/.zpreztorc
 mkdir -p $HOME/.zprezto/contrib
-ln -s $DOTFILES/zprezto/contrib $HOME/.zprezto/contrib
+ln -s $DOTFILES/zprezto/contrib $HOME/.zprezto/
 #ln -s $DOTFILES/bash_aliases .bash_aliases
 ln -fs $DOTFILES/bash_gitprompt $HOME/.bash_gitprompt
 ln -fs $DOTFILES/bash_logout $HOME/.bash_logout
