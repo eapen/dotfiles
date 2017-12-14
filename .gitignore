@@ -5,3 +5,12 @@ vim/undo/*
 vim/.netrwhist
 bash_aliases
 bin/fixssh
+config
+bin
+fonts
+irssi/irssi
+scripts/scripts
+vim/vim
+tmux.*.bak
+tmux*.log
+
